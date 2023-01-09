@@ -1,0 +1,14 @@
+1. Initial position can be given from the .c file also. It has the dimension of nq*1.
+   nq is x,y,z and a quaternion.
+
+2. In C, if we have a const structure in a function then its data members can still be modified. In C++, you cannot. Some weird 
+   black magic going on.
+
+3. d->ctrl is used to give control input. There is no need to create a motor and postion+velocity actuator. 
+   We can create a motor actuator and give the whoel PD control input in it. Or we can individually
+   give the position control input and velocity control input. While giving them position and velocity control
+   don't need to multiply with kp and kv as they will automatically get multplied in the simulation process.
+
+4. Use RK4 integrator to get accurate energy measurements. In Euler, total energy decreases.
+
+Model info can be taken from "Print model" in ./simulate. It generates a lot of things.

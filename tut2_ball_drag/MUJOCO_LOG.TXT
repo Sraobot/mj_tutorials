@@ -1,0 +1,9 @@
+Thu Jan  5 18:29:34 2023
+ERROR: Load model error: mjParseXML: filename argument required
+
+
+Thu Jan  5 18:30:58 2023
+ERROR: Load model error: XML parse error 14:
+Error=XML_ERROR_MISMATCHED_ELEMENT ErrorID=14 (0xe) Line number=2: XMLElement name=worldbody
+
+
