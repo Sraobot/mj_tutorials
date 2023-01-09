@@ -1,0 +1,38 @@
+<mujoco>
+	
+	<option gravity="0 0 -9.81"/>
+	<!-- To make it more brighter -->
+	<visual>
+		<headlight ambient="0.5 0.5 0.5"/>
+	</visual>
+	
+	<!-- Asset is like xacro in urdf -->
+	<asset>
+		<material name="white" rgba="1 1 1 1"/>
+	</asset>
+	<worldbody>
+        <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+		<geom type="plane" size="1 1 0.1" rgba=".9 0 0 1"/>
+		
+		<body pos="0 0 1" euler="0 0 0">
+			<joint type="free"/>
+			<inertial pos="0 0 0" mass="1" diaginertia=".001 .001 .001"/>
+			<!--<geom type="box" size=".1 .2 .3" rgba="0 .9 0 1"/>-->
+			<geom type="box" size=".1 .2 .3" material="white"/>
+		</body>
+		
+		<body pos="0 0 1.5" euler="0 90 0">
+			<joint type="free"/>
+			<geom type="box" size=".1 .2 .3" rgba="0 .9 0 1"/>
+		</body>
+		
+		<body pos="0.3 0 10">
+			<joint type="free"/>
+			<inertial pos="0 0 0" mass="10" diaginertia="0.1 0.1 0.1"/>
+			<geom type="sphere" size="0.1" rgba="0 0 1 1"/>
+		</body>	
+	</worldbody>
+</mujoco>
+<!-- 
+1. When we run this file the boxes fall, because there is gravity. If we make the gravity zero then the boxes will not fall.
+-->
