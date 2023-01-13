@@ -1,0 +1,38 @@
+<mujoco>
+	<option gravity="0 0 -9.81" integrator="RK4">
+		<flag energy="enable" contact="disable"/>
+	</option>
+	<size nuserdata="2"/>
+	<worldbody>
+		<light diffuse=".5 .5 .5" pos="0 0 0" dir="0 0 -1"/>
+		<geom type="plane" size="1 1 .1" rgba="1 1 1 1"/>
+		<body pos="0 0 1.25" euler="0 0 0">
+			<joint name="pin1" type="hinge" axis="0 1 0" pos="0 0 .5"/>
+			<geom type="cylinder" size=".05 .5" rgba="1 0 0 1" mass="1"/>
+			
+			<!--Moved a bit by y-axis to prevent collision-->
+			<body pos="0 0.1 -1" euler="0 0 0">
+				<joint name="pin2" type="hinge" axis="0 1 0" pos="0 0 0.5"/>
+				<geom type="cylinder" size="0.05 0.5" rgba="0 1 0 1" mass="1"/>
+				<site name="endeff" pos="0 0 -0.5" size="0.1"/>
+ 			</body> 
+		
+		</body> 
+	</worldbody>
+	<actuator>
+		<!--Motor gets to know joint from the joint name -->
+<!--		<motor joint="pin1" name="torque1" gear="1" ctrllimited="true" ctrlrange="-100 100"/> -->
+		<position name="pservo1" joint="pin1" kp="500"/>
+		<velocity name="vservo1" joint="pin1" kv="100"/> 
+		
+	<!--	<motor joint="pin2" name="torque2" gear="1" ctrllimited="true" ctrlrange="-100 100"/> -->
+	<position name="pservo2" joint="pin2" kp="500"/>
+		<velocity name="vservo2" joint="pin2" kv="100"/> 
+	</actuator>
+	<sensor>
+		<framepos objtype="site" objname="endeff"/>
+		<framelinvel objtype="site" objname="endeff"/>
+	</sensor>
+</mujoco>
+
+

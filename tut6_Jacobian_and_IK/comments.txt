@@ -1,0 +1,11 @@
+1.	Mujoco provides a way to access the end-effector using 'site' in 'geom'.
+
+2.	For site there is no sensor like jointpos for joints. We use framepos to get the 
+	position of the site(here endeffector).
+
+3.	Everything has a frame attached to it.
+
+4.  We need to add <size nuserdata=2/> to XMl file to use d->userdata in the code.
+
+5.	It will not work bigger changes. It will only work for small changes.
+	What we did dq = inv(J)dx and then q_new = q_old + dq.
