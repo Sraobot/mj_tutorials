@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "/home/sahil/Desktop/tutorials/mujoco_tutorials/mujoco-2.3.1/my_project/tut4_double_pendulum",
+    "file": "main.cpp",
+    "command": "cc -O2 -I../../include -L../../lib -pthread -Wl,-no-as-needed -Wl,-rpath,'$ORIGIN'/../../lib main.cpp -lmujoco -lglfw -lm  -o main"
+  }
+]

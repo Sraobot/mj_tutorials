@@ -1,0 +1,36 @@
+In this, we try to control underactuated system of double pendulum with just actuator using LQR control near the chosen
+operating point. Appropiate gain is found from LQR.
+
+1.	When actuators are less than degree of freedoms then those systems are called underactuated systems.
+	These systems are harder to control than actuated systems.
+
+2.  We will use the torque tau = -K1*q1 - K2*q1dot - K3*q2 - K4*q2dot. Those gains will be chosen by LQR method.
+
+3.  In LQR, we minimize \int_0^{\infty} x'Qx + u'Ru . Q and R are PD matrices chosen by the user. Typically we chose them 
+	to be Q = I matrix and R = rho*I matrix. When rho << 1 then gains are large and if rho >> 1 gains are small. Gains impact
+	the control input proportionally in magnitude.
+
+4.	Problem with LQR is that it is designed for linear systems. To use LLLQR on  a non linear system, we need to linearise it i.e 
+	from xdot = f(x,u) to xdot = Ax + Bu.  We linearise about a reference point using Taylor series. 
+
+5.  Equation for a double pendulum are of the form M(q)qddot + N(q,qdot) = T where M is the mass matrix, N(q,qdot) is the 
+	coriolis + gravity matrix and t is the torque. For a pendubot T = [u 0]' and for a Acrobot T = [0 u]'.
+
+6.  From equations of motion we can find qddot = inv(M)*(T - N(q,qdot)) and then use that in finding xdot which is 
+	(q1dot, q1ddot, q2dot, q2ddot) = (f1, f2, f3, f4) = xdot.
+
+7. 	For linearised system, A = (del f)/(del x) and B = (del f)/(del u).
+
+8. 	We can find the gain using scipy. See the LQR tutorial of mujoco.
+
+9. 	If we pertub a bit more from th origin then the controller goes haywire. Why origin? Because
+	of origin we get xdot = Ax + Bu. If we take some other position then the equation will be slightly differnet
+	and we will need to use that equation. Then, if we perturb from that position then the controller will work.
+
+10. d->xfrc_applied(6*body + i) can apply cartestian force and cartesian torque in x,y,z direction. body denotes as 0 for ground
+	1 for first body, 2nd for second body. First 3 are for x,y,z cartestian forces and second 3 for x,y,z torque directions.
+	Force in x will be i=0, F in y will be i=1, F in z will be i=2, torque in x will be i=3, torque in y will be i=4 and torque
+	in z will be i=5.
+
+11. d->qfrc_applied() is a bit different compared to d->xfrc_applied(). This applies generalised force on joints. There is 0,
+	1,2... denoting the joint number as defined in the xml file.
